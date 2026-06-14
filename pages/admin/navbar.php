@@ -10,7 +10,8 @@
                     <li class="nav-item"><a class="nav-link" href="../index.php">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.php">Boutique</a></li>
                     <li class="nav-item"><a class="nav-link" href="categories.php">Catégories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../index.php#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                 </ul>
                 <a class="text-white fs-5 m-3" href="admin-dashboard.php"><i class="bi bi-person"></i></a>
                 <a class="text-white fs-5 m-3" href="#"><i class="bi bi-search"></i></a>

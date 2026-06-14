@@ -29,11 +29,12 @@ require_permission('producer.create_market'); ?>
             <span>Green</span>Market
         </div>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a active="" href="#">Markets</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="products.php">Products</a></li>
             <li><a href="#">Orders</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="about.php">À propos</a></li>
+            <li><a href="contact.php">Contact</a></li>
         </ul>
         <div class="nav-buttons">
             <button class="login-btn">Login</button>

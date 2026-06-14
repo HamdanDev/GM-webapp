@@ -1,0 +1,75 @@
+.navbar {
+  background-color: var(--gm-green);
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--gm-sand);
+}
+
+.cart-badge {
+  background-color: var(--gm-orange);
+}
+
+.info-hero {
+  background: linear-gradient(rgba(36, 75, 42, 0.74), rgba(36, 75, 42, 0.74)), url('../../images/home/artisanatCategorie.jpg') center/cover;
+  color: #fff;
+  padding: 88px 0;
+}
+
+.info-hero .eyebrow {
+  color: var(--gm-sand);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.info-card {
+  background: #fff;
+  border: 1px solid rgba(36, 75, 42, 0.08);
+  border-radius: 18px;
+  box-shadow: var(--gm-shadow);
+  padding: 28px;
+  height: 100%;
+}
+
+.info-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f5e9;
+  color: var(--gm-green);
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+}
+
+.contact-panel {
+  background: #f8faf8;
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.contact-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.contact-item i {
+  color: var(--gm-orange);
+  font-size: 1.25rem;
+}
+
+.btn-info-send {
+  background: var(--gm-green);
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 22px;
+}

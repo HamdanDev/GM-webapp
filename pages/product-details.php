@@ -126,7 +126,8 @@ $recommendedProducts = $recommendStmt->fetchAll();
           <li class="nav-item"><a class="nav-link" href="../index.php">Accueil</a></li>
           <li class="nav-item"><a class="nav-link" href="products.php">Boutique</a></li>
           <li class="nav-item"><a class="nav-link" href="categories.php">Catégories</a></li>
-          <li class="nav-item"><a class="nav-link" href="../index.php#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.php">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
         </ul>
         <a class="text-white fs-5 m-3" href="auth.php"><i class="bi bi-person"></i></a>
         <a class="text-white fs-5 m-3" href="#"><i class="bi bi-search"></i></a>
@@ -285,7 +286,7 @@ $recommendedProducts = $recommendStmt->fetchAll();
       <div class="container">
         <div class="row g-4">
           <div class="col-12 col-md-3"><h5 class="footer-title">Green Market</h5><p class="footer-text">Votre marketplace de produits artisanaux marocains, directs des coopératives.</p></div>
-          <div class="col-6 col-md-3"><h6 class="footer-title">Liens utiles</h6><ul class="list-unstyled"><li><a class="footer-link" href="../index.php">Accueil</a></li><li><a class="footer-link" href="products.php">Boutique</a></li><li><a class="footer-link" href="categories.php">Catégories</a></li><li><a class="footer-link" href="../index.php#contact">Contact</a></li></ul></div>
+          <div class="col-6 col-md-3"><h6 class="footer-title">Liens utiles</h6><ul class="list-unstyled"><li><a class="footer-link" href="../index.php">Accueil</a></li><li><a class="footer-link" href="products.php">Boutique</a></li><li><a class="footer-link" href="categories.php">Catégories</a></li><li><a class="footer-link" href="about.php">À propos</a></li><li><a class="footer-link" href="contact.php">Contact</a></li></ul></div>
           <div class="col-6 col-md-3"><h6 class="footer-title">Catégories</h6><ul class="list-unstyled"><li><a class="footer-link" href="products.php">Produits Bio</a></li><li><a class="footer-link" href="products.php">Cosmétiques</a></li><li><a class="footer-link" href="products.php">Artisanat</a></li><li><a class="footer-link" href="products.php">Mode Traditionnelle</a></li></ul></div>
           <div class="col-12 col-md-3"><h6 class="footer-title">Contact</h6><ul class="list-unstyled"><li class="footer-text small"><i class="bi bi-envelope me-2"></i>contact@greenmarket.ma</li><li class="footer-text small"><i class="bi bi-telephone me-2"></i>+212 6 00 00 00 00</li><li class="footer-text small"><i class="bi bi-geo-alt me-2"></i>Marrakech, Maroc</li></ul></div>
         </div>

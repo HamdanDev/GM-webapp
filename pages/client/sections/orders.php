@@ -1,7 +1,7 @@
                 <div class="section d-none" id="commandes">
                     <h4 class="mb-4">Mes Commandes</h4>
                     <div class="content-card">
-                        <table class="table table-borderless">
+                        <table class="table table-borderless" data-table-pagination>
                             <thead><tr class="text-muted small"><th>Produit</th><th>Date</th><th>Prix</th><th>Statut</th></tr></thead>
                             <tbody>
                                 <?php foreach ($clientOrders as $order): ?>

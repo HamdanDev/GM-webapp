@@ -1,4 +1,7 @@
 <?php
+require __DIR__ . '/product-controller.php';
+require __DIR__ . '/order-controller.php';
+
 $adminSections = [
     'dashboard',
     'users',

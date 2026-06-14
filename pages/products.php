@@ -5,6 +5,8 @@ require_once __DIR__ . '/../includes/view_helpers.php';
 $categoryFilter = $_GET['categorie'] ?? null;
 $shopFilter = $_GET['boutique'] ?? null;
 $priceFilter = $_GET['prix'] ?? null;
+$traceFilter = isset($_GET['trace']);
+$sortFilter = $_GET['tri'] ?? '';
 
 // Load filter values from the database so the sidebar stays in sync with seeded categories/shops.
 $categoriesStmt = $pdo->query('SELECT ID_Categ, nom_Categ FROM categorie ORDER BY nom_Categ');
@@ -57,8 +59,22 @@ if ($priceFilter === 'moins-50') {
     $sql .= ' AND p.Prix > 300';
 }
 
+if ($traceFilter) {
+    $sql .= ' AND EXISTS (SELECT 1 FROM traceabilite t WHERE t.ID_Prod = p.ID_Prod)';
+}
+
 $sql .= ' GROUP BY p.ID_Prod, p.nom_Prod, p.Prix, p.Prod_img, p.created_at, c.ID_Categ, c.nom_Categ, b.nom_boutique
-          ORDER BY p.created_at DESC, p.ID_Prod DESC';
+          ORDER BY ';
+
+if ($sortFilter === 'prix-asc') {
+    $sql .= 'p.Prix ASC, p.ID_Prod DESC';
+} elseif ($sortFilter === 'prix-desc') {
+    $sql .= 'p.Prix DESC, p.ID_Prod DESC';
+} elseif ($sortFilter === 'notes') {
+    $sql .= 'average_rating DESC, review_count DESC, p.ID_Prod DESC';
+} else {
+    $sql .= 'p.created_at DESC, p.ID_Prod DESC';
+}
 
 $productsStmt = $pdo->prepare($sql);
 $productsStmt->execute($params);
@@ -95,7 +111,8 @@ $productCount = count($products);
                     <li class="nav-item"><a class="nav-link" href="../index.php">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#">Boutique</a></li>
                     <li class="nav-item"><a class="nav-link" href="categories.php">Catégories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../index.php#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                 </ul>
                 <a class="text-white fs-5 m-3" href="auth.php"><i class="bi bi-person"></i></a>
                 <a class="text-white fs-5 m-3" href="#"><i class="bi bi-search"></i></a>
@@ -150,7 +167,7 @@ $productCount = count($products);
                         <div class="mb-4">
                             <h6 class="fw-bold sidebar-title">Traçabilité</h6>
                             <div class="form-check">
-                                <input class="form-check-input" id="trace" type="checkbox" />
+                                <input class="form-check-input" id="trace" name="trace" value="1" type="checkbox" <?php echo $traceFilter ? 'checked' : ''; ?> />
                                 <label class="form-check-label small" for="trace">Produits traçables uniquement</label>
                             </div>
                         </div>
@@ -161,15 +178,16 @@ $productCount = count($products);
                 <div class="col-12 col-md-9">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <span class="text-muted small">Affichage <?php echo $productCount > 0 ? '1-' . $productCount : '0'; ?> sur <?php echo $productCount; ?> produits</span>
-                        <select class="form-select form-select-sm w-auto trier">
-                            <option selected="">Trier par défaut</option>
-                            <option>Prix croissant</option>
-                            <option>Prix décroissant</option>
-                            <option>Mieux notés</option>
+                        <select class="form-select form-select-sm w-auto trier" form="filter-form" name="tri" onchange="this.form.submit()">
+                            <option value="" <?php echo $sortFilter === '' ? 'selected' : ''; ?>>Trier par défaut</option>
+                            <option value="prix-asc" <?php echo $sortFilter === 'prix-asc' ? 'selected' : ''; ?>>Prix croissant</option>
+                            <option value="prix-desc" <?php echo $sortFilter === 'prix-desc' ? 'selected' : ''; ?>>Prix décroissant</option>
+                            <option value="notes" <?php echo $sortFilter === 'notes' ? 'selected' : ''; ?>>Mieux notés</option>
                         </select>
                     </div>
                     <div class="row g-3">
-                        <?php foreach ($products as $product): ?>
+                        <?php if ($products): ?>
+                            <?php foreach ($products as $product): ?>
                             <div class="col-6 col-md-4">
                                 <div class="card border-0 shadow-sm h-100">
                                     <?php if (strtotime($product['created_at']) >= strtotime('-30 days')): ?>
@@ -186,12 +204,21 @@ $productCount = count($products);
                                         <p class="text-success fw-bold mb-2"><?php echo e(format_price($product['Prix'])); ?></p>
                                         <div class="d-flex gap-2">
                                             <a class="btn btn-sm w-75 btn-voir" href="product-details.php?id=<?php echo (int) $product['ID_Prod']; ?>">Voir</a>
-                                            <button class="btn btn-sm text-white btn-add w-25"><i class="bi bi-cart"></i></button>
+                                            <button class="btn btn-sm text-white btn-add w-25 js-cart-add" type="button"><i class="bi bi-cart"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="col-12">
+                                <div class="alert alert-light border text-center py-5">
+                                    <h5 class="fw-bold mb-2">Aucun produit trouvé</h5>
+                                    <p class="text-muted mb-3">Essayez de modifier les filtres sélectionnés.</p>
+                                    <a class="btn btn-reset" href="products.php">Voir tous les produits</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -215,8 +242,8 @@ $productCount = count($products);
                     <ul class="list-unstyled">
                         <li><a class="text-muted text-decoration-none small" href="../index.php">Accueil</a></li>
                         <li><a class="text-muted text-decoration-none small" href="products.php">Boutique</a></li>
-                        <li><a class="text-muted text-decoration-none small" href="#">À propos</a></li>
-                        <li><a class="text-muted text-decoration-none small" href="../index.php#contact">Contact</a></li>
+                        <li><a class="text-muted text-decoration-none small" href="about.php">À propos</a></li>
+                        <li><a class="text-muted text-decoration-none small" href="contact.php">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md-3">

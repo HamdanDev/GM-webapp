@@ -115,7 +115,7 @@ ON DUPLICATE KEY UPDATE
   `ville` = VALUES(`ville`),
   `ID_utili` = VALUES(`ID_utili`);
 
--- Products from products.php, product-details.js, client profile, and recommendations.
+-- Products from products.php, product-details.js, client dashboard, and recommendations.
 INSERT INTO `produit` (`ID_Prod`, `nom_Prod`, `Prix`, `Stock`, `Prod_img`, `ID_boutique`, `ID_Categ`, `description`, `est_active`, `created_at`) VALUES
 (1, 'Savon Beldi', 45.00, 120, 'assets/images/products/savonBeldi.png', 1, 2, 'Savon Beldi traditionnel marocain, enrichi à l''huile d''olive naturelle. Il nettoie la peau en profondeur, élimine les cellules mortes et laisse la peau douce, lisse et éclatante. Idéal pour le hammam et les soins du corps.', 1, '2026-06-13 17:30:00'),
 (2, 'Huile d''Argan', 120.00, 75, 'assets/images/products/huileArganBio.png', 2, 5, 'Huile d''argan pure du Maroc, riche en vitamine E et en antioxydants. Elle hydrate intensément la peau et les cheveux, aide à réparer les pointes abîmées et lutte contre le dessèchement et le vieillissement cutané.', 1, '2026-06-13 17:31:00'),
@@ -230,13 +230,13 @@ INSERT INTO `traceabilite` (`ID_Prod`, `titre`, `description`, `lieu`, `date_tra
 (2, 'Contrôle & Emballage', 'Vérification qualité et conditionnement avec code QR traçabilité.', 'Casablanca, Maroc', '28 Mars 2024', 'bi-box-seam', 'assets/images/product-details/tracabiliteStep/traceabiliteStep3.jpeg', 3),
 (2, 'Livraison', 'Expédié avec soin jusqu''à votre domicile.', 'Votre adresse', 'En attente', 'bi-truck', 'assets/images/product-details/tracabiliteStep/traceabiliteStep4.jpeg', 4);
 
--- Client favorites from client-profile.php.
+-- Client favorites from client-dashboard.php.
 INSERT INTO `favoris` (`ID_utili`, `ID_Prod`) VALUES
 (1, 1),
 (1, 2)
 ON DUPLICATE KEY UPDATE `ID_utili` = VALUES(`ID_utili`);
 
--- Client orders from client-profile.php.
+-- Client orders from client-dashboard.php.
 INSERT INTO `commande` (`ID_Com`, `date_com`, `status_com`, `prix_total`, `ID_utili`) VALUES
 (1, '2026-05-12 10:00:00', 'livré', 45.00, 1),
 (2, '2026-05-05 15:30:00', 'en cours', 120.00, 1),
@@ -280,7 +280,7 @@ ON DUPLICATE KEY UPDATE
   `ID_Com` = VALUES(`ID_Com`),
   `ID_utili` = VALUES(`ID_utili`);
 
--- Reviews from client-profile.php and product-details.php.
+-- Reviews from client-dashboard.php and product-details.php.
 INSERT INTO `avis` (`ID_Avis`, `note`, `commentaire`, `ID_utili`, `ID_Prod`, `created_at`) VALUES
 (1, 4, 'Très bon produit, naturel et efficace!', 1, 1, '2026-05-12 18:00:00'),
 (2, 5, 'Magnifique tapis, exactement comme sur la photo!', 1, 3, '2026-04-28 18:00:00'),

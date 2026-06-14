@@ -10,7 +10,7 @@ if (is_logged_in()) {
         header('Location: producer-dashboard.php');
         exit;
     }
-    header('Location: client-profile.php');
+    header('Location: client-dashboard.php');
     exit;
 }
 $mode = $_GET['mode'] ?? 'login';

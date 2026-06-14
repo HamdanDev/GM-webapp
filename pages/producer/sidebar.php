@@ -8,10 +8,10 @@
                     <hr class="my-2" />
                     <!-- Avatar + Info -->
                     <div class="d-flex align-items-center gap-3 p-2">
-                        <div class="avatar">A</div>
+                        <div class="avatar"><?= e(substr($profileUser['prenom'] ?? 'P', 0, 1)) ?></div>
                         <div>
-                            <h6 class="fw-bold mb-0">Ahmed Gheziel</h6>
-                            <small class="text-muted">Producteur</small>
+                            <h6 class="fw-bold mb-0"><?= e(trim(($profileUser['prenom'] ?? '') . ' ' . ($profileUser['nom'] ?? ''))) ?></h6>
+                            <small class="text-muted"><?= e(ucfirst($profileUser['role'] ?? 'producteur')) ?></small>
                         </div>
                     </div>
                     <hr />

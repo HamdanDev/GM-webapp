@@ -44,6 +44,6 @@ if ($user['role'] === 'admin') {
 } elseif ($user['role'] === 'producteur') {
     header('Location: ../pages/producer-dashboard.php');
 } else {
-    header('Location: ../pages/client-profile.php');
+    header('Location: ../pages/client-dashboard.php');
 }
 exit;

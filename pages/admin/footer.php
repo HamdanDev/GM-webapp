@@ -17,8 +17,8 @@
                         <ul class="list-unstyled">
                             <li><a class="footer-link" href="../index.php">Accueil</a></li>
                             <li><a class="footer-link" href="products.php">Boutique</a></li>
-                            <li><a class="footer-link" href="#">À propos</a></li>
-                            <li><a class="footer-link" href="../index.php#contact">Contact</a></li>
+                            <li><a class="footer-link" href="about.php">À propos</a></li>
+                            <li><a class="footer-link" href="contact.php">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-6 col-md-3">

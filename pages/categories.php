@@ -50,7 +50,8 @@ $categories = $stmt->fetchAll();
                     <li class="nav-item"><a class="nav-link" href="../index.php">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.php">Boutique</a></li>
                     <li class="nav-item"><a class="nav-link active" href="#">Catégories</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.php">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                 </ul>
                 <a class="text-white fs-5 m-3" href="auth.php"><i class="bi bi-person"></i></a>
                 <a class="text-white fs-5 m-3" href="#"><i class="bi bi-search"></i></a>
@@ -114,7 +115,8 @@ $categories = $stmt->fetchAll();
                         <ul class="list-unstyled">
                             <li><a class="footer-link" href="../index.php">Accueil</a></li>
                             <li><a class="footer-link" href="products.php">Boutique</a></li>
-                            <li><a class="footer-link" href="#contact">Contact</a></li>
+                            <li><a class="footer-link" href="about.php">À propos</a></li>
+                            <li><a class="footer-link" href="contact.php">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-6 col-md-3">

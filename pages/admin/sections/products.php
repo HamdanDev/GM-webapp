@@ -1,86 +1,90 @@
-﻿                <div class="section d-none" id="produits">
+                <div class="section d-none" id="produits">
+                    <?php if ($adminProductMessage && $adminProductTargetSection !== 'stock'): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?= e($adminProductMessage) ?>
+                            <button aria-label="Fermer" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($adminProductError && $adminProductTargetSection !== 'stock'): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?= e($adminProductError) ?>
+                            <button aria-label="Fermer" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="row g-3 mb-3">
                         <div class="col-lg-3 col-md-6">
                             <div class="card-ca h-100">
-                                <div class="icon">
-                                    <i class="bi-check-circle"></i>
-                                </div>
+                                <div class="icon"><i class="bi-check-circle"></i></div>
                                 <div class="content">
-                                    <p class="title fw-bold">Produits validés</p>
-                                    <h2 class="fw-bold">120</h2>
+                                    <p class="title fw-bold">Produits actifs</p>
+                                    <h2 class="fw-bold"><?= (int) $adminProductStats['active'] ?></h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="card-ca h-100">
-                                <div class="icon">
-                                    <i class="bi-hourglass-split"></i>
-                                </div>
-                                <div class="content">
-                                    <p class="title fw-bold">En attente</p>
-                                    <h2 class="fw-bold">10</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card-ca h-100">
-                                <div class="icon">
-                                    <i class="bi-exclamation-triangle"></i>
-                                </div>
-                                <div class="content">
-                                    <p class="title fw-bold">Signalés</p>
-                                    <h2 class="fw-bold">3</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="card-ca h-100">
-                                <div class="icon">
-                                    <i class="bi-slash-circle"></i>
-                                </div>
+                                <div class="icon"><i class="bi-slash-circle"></i></div>
                                 <div class="content">
                                     <p class="title fw-bold">Suspendus</p>
-                                    <h2 class="fw-bold">5</h2>
+                                    <h2 class="fw-bold"><?= (int) $adminProductStats['inactive'] ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-ca h-100">
+                                <div class="icon"><i class="bi-exclamation-triangle"></i></div>
+                                <div class="content">
+                                    <p class="title fw-bold">Stock faible</p>
+                                    <h2 class="fw-bold"><?= (int) $adminProductStats['low_stock'] ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card-ca h-100">
+                                <div class="icon"><i class="bi-x-circle"></i></div>
+                                <div class="content">
+                                    <p class="title fw-bold">Rupture</p>
+                                    <h2 class="fw-bold"><?= (int) $adminProductStats['out_stock'] ?></h2>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="products-page">
                         <div class="stock-header">
                             <div>
                                 <h2>
                                     Tous les Produits
-                                    <span class="product-count">(24)</span>
+                                    <span class="product-count">(<?= (int) $adminProductStats['total'] ?>)</span>
                                 </h2>
-                                <p class="subtitle">
-                                    Supervisez et gérez les produits de la plateforme.
-                                </p>
+                                <p class="subtitle">Supervisez et gérez les produits de la plateforme.</p>
                             </div>
                             <div class="header-actions">
-                                <button class="export-btn">
+                                <button class="export-btn" type="button">
                                     <i class="bi bi-download me-2"></i>
                                     Exporter le rapport
                                 </button>
-                                <button class="add-btn">
-                                    <a class="btn-link" data-section="ajouter-produit" href="#">
+                                <a class="btn-link" data-section="ajouter-produit" href="#">
+                                    <button class="add-btn" type="button">
                                         <i class="bi bi-plus-lg me-2"></i>
                                         Ajouter un produit
-                                    </a>
-                                </button>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                         <div class="top-bar">
                             <div class="search-box">
                                 <i class="bi bi-search"></i>
-                                <input placeholder="Rechercher un produit..." type="text" />
+                                <input data-product-search placeholder="Rechercher un produit..." type="text" />
                             </div>
                             <div class="filter-box">
                                 <i class="bi bi-funnel"></i>
-                                <select id="filterCategory">
-                                    <option>tous categories</option>
-                                    <option>Artisanat</option>
-                                    <option>Cosmétiques</option>
-                                    <option>Mode Traditionnelle</option>
+                                <select data-product-category-filter>
+                                    <option value="">Toutes catégories</option>
+                                    <?php foreach ($adminCategories as $category): ?>
+                                        <option value="<?= (int) $category['ID_Categ'] ?>"><?= e($category['nom_Categ']) ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -91,148 +95,106 @@
                                         <th>Produit</th>
                                         <th>Catégorie</th>
                                         <th>Prix</th>
+                                        <th>Stock</th>
                                         <th>Producteur</th>
                                         <th>Statut</th>
-                                        <th>Signalements</th>
+                                        <th>Avis</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="product-info">
-                                                <img alt="Savon" src="../assets/images/product-details/savonBeldi/savonBeldiNila.jpeg" />
-                                                <div>
-                                                    <h6>Savon Beldi</h6>
-                                                    <small>#PRD-102</small>
+                                    <?php foreach ($adminProducts as $product): ?>
+                                        <?php
+                                        $productId = (int) $product['ID_Prod'];
+                                        $producerName = trim($product['producer_prenom'] . ' ' . $product['producer_nom']);
+                                        ?>
+                                        <tr
+                                            data-product-row
+                                            data-product-search-value="<?= e(strtolower($product['nom_Prod'] . ' ' . $product['nom_Categ'] . ' ' . $producerName)) ?>"
+                                            data-product-category-value="<?= (int) $product['ID_Categ'] ?>"
+                                        >
+                                            <td>
+                                                <div class="product-info">
+                                                    <img alt="<?= e($product['nom_Prod']) ?>" src="<?= e(asset_url($product['Prod_img'])) ?>" />
+                                                    <div>
+                                                        <h6><?= e($product['nom_Prod']) ?></h6>
+                                                        <small>#PRD-<?= str_pad((string) $productId, 3, '0', STR_PAD_LEFT) ?></small>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>Cosmétiques</td>
-                                        <td>120 DH</td>
-                                        <td>
-                                            <div class="product-info">
-                                                <div>
-                                                    <h6>Ahmadi Ahmad</h6>
-                                                    <small>#P-102</small>
+                                            </td>
+                                            <td><?= e($product['nom_Categ']) ?></td>
+                                            <td><?= e(format_price($product['Prix'])) ?></td>
+                                            <td><?= (int) $product['Stock'] ?></td>
+                                            <td>
+                                                <div class="product-info">
+                                                    <div>
+                                                        <h6><?= e($producerName) ?></h6>
+                                                        <small><?= e($product['nom_boutique']) ?></small>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="stock ok">Validé</span></td>
-                                        <td>0</td>
-                                        <td>
-                                            <div class="action-buttons">
+                                            </td>
+                                            <td><span class="<?= e(admin_product_status_class($product)) ?>"><?= e(admin_product_status_label($product)) ?></span></td>
+                                            <td><?= (int) $product['review_count'] ?></td>
+                                            <td>
                                                 <div class="action-buttons">
-                                                    <button class="icon-btn title=" details"="" voir="">
-                                                        <a class="btn-link view-btn" data-section="voir-produit" href="#">
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
+                                                    <button
+                                                        class="icon-btn edit-btn"
+                                                        data-product-edit
+                                                        data-id="<?= $productId ?>"
+                                                        data-name="<?= e($product['nom_Prod']) ?>"
+                                                        data-price="<?= e((string) $product['Prix']) ?>"
+                                                        data-stock="<?= (int) $product['Stock'] ?>"
+                                                        data-image="<?= e($product['Prod_img']) ?>"
+                                                        data-category="<?= (int) $product['ID_Categ'] ?>"
+                                                        data-shop="<?= (int) $product['ID_boutique'] ?>"
+                                                        data-description="<?= e($product['description']) ?>"
+                                                        data-active="<?= (int) $product['est_active'] ?>"
+                                                        title="Modifier"
+                                                        type="button"
+                                                    >
+                                                        <i class="bi bi-pencil"></i>
                                                     </button>
-                                                    <button class="icon-btn export-btn" disabled="" title="Confirmer"><i class="bi bi-check-circle"></i></button>
-                                                    <button class="icon-btn" title="modifier">
-                                                        <a class="btn-link edit-btn" data-section="modifier-produit" href="#">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </a>
-                                                    </button>
-                                                    <button class="icon-btn remove-btn" title="supprimer">
+                                                    <button
+                                                        class="icon-btn remove-btn"
+                                                        data-bs-target="#deleteProductModal"
+                                                        data-bs-toggle="modal"
+                                                        data-product-delete
+                                                        data-id="<?= $productId ?>"
+                                                        data-name="<?= e($product['nom_Prod']) ?>"
+                                                        title="Supprimer"
+                                                        type="button"
+                                                    >
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="product-info">
-                                                <img alt="Huile" src="../assets/images/product-details/arganOil/huileArganBio.png" />
-                                                <div>
-                                                    <h6>Huile d'Argan</h6>
-                                                    <small>#PRD-221</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Cosmétiques</td>
-                                        <td>250 DH</td>
-                                        <td>
-                                            <div class="product-info">
-                                                <div>
-                                                    <h6>Ahmadi Ahmad</h6>
-                                                    <small>#P-102</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="enatent">En attente</span></td>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="icon-btn title=" details"="" voir="">
-                                                    <a class="btn-link view-btn" data-section="voir-produit" href="#">
-                                                        <i class="bi bi-eye"></i>
-                                                    </a>
-                                                </button>
-                                                <button class="icon-btn export-btn" title="Confirmer"><i class="bi bi-check-circle"></i></button>
-                                                <button class="icon-btn" title="modifier">
-                                                    <a class="btn-link edit-btn" data-section="modifier-produit" href="#">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </a>
-                                                </button>
-                                                <button class="icon-btn remove-btn" title="supprimer">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="product-info">
-                                                <img alt="Tagine Terracotta" src="../assets/images/product-details/tagineTerracotta/" />
-                                                <div>
-                                                    <h6>Tagine Terracotta</h6>
-                                                    <small>#PRD-310</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Mode Traditionnelle</td>
-                                        <td>180 DH</td>
-                                        <td>
-                                            <div class="product-info">
-                                                <div>
-                                                    <h6>Ahmadi Ahmad</h6>
-                                                    <small>#P-102</small>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><span class="stock out">Refusé</span></td>
-                                        <td>1</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="icon-btn title=" details"="" voir="">
-                                                    <a class="btn-link view-btn" data-section="voir-produit" href="#">
-                                                        <i class="bi bi-eye"></i>
-                                                    </a>
-                                                </button>
-                                                <button class="icon-btn export-btn" disabled="" title="Confirmer"><i class="bi bi-check-circle"></i></button>
-                                                <button class="icon-btn" disabled="" title="modifier">
-                                                    <a class="btn-link edit-btn" data-section="modifier-produit" href="#">
-                                                        <i class="bi bi-pencil"></i>
-                                                    </a>
-                                                </button>
-                                                <button class="icon-btn remove-btn" title="supprimer">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Pagination -->
-                        <div class="custom-pagination">
-                            <button class="pagination-arrow">«</button>
-                            <button class="pagination-number active">1</button>
-                            <button class="pagination-number">2</button>
-                            <button class="pagination-number">3</button>
-                            <button class="pagination-arrow">»</button>
+                    </div>
+
+                    <div aria-hidden="true" aria-labelledby="deleteProductModalLabel" class="modal fade" id="deleteProductModal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form class="modal-content" method="post">
+                                <input name="product_action" type="hidden" value="delete" />
+                                <input data-delete-product-id name="ID_Prod" type="hidden" />
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteProductModalLabel">Supprimer produit</h5>
+                                    <button aria-label="Fermer" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Voulez-vous vraiment supprimer <strong data-delete-product-name></strong> ?
+                                    <p class="text-muted small mb-0 mt-2">La suppression sera bloquée si ce produit est lié à des commandes, avis, paniers ou favoris.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="annul-btn" data-bs-dismiss="modal" type="button">Annuler</button>
+                                    <button class="add-btn" type="submit">
+                                        <i class="bi bi-trash me-2"></i> Supprimer
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
