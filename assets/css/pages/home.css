@@ -1,0 +1,228 @@
+/* =====================
+   VARIABLES
+===================== */
+:root {
+  --green:        #2d4a2d;
+  --green-hover:  #3f683f;
+  --orange:       #e07b39;
+  --beige-light:  #f5ede0;
+  --beige-mid:    #ead4b6;
+  --beige-dark:   #D8C3A5;
+  --beige-footer: #c4aa8a;
+  --brown-title:  #6b4d3a;
+  --brown-text:   #8c7b6a;
+}
+
+/* =====================
+   BODY & FONTS
+===================== */
+body {
+  background-color: var(--beige-light);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
+  background-color: var(--green);
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #ffffff;
+}
+
+.cart-badge {
+  background-color: var(--orange);
+  font-size: 0.6rem;
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* =====================
+   HERO CAROUSEL
+===================== */
+.hero-img {
+  height: 480px;
+  object-fit: cover;
+}
+
+/* =====================
+   BADGES
+===================== */
+.badge-nouveau {
+  background-color: var(--orange);
+}
+
+/* =====================
+   PRODUCT CARDS
+===================== */
+.card-body {
+  background-color: var(--beige-mid);
+}
+
+.product-img {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+}
+
+.btn-add {
+  background-color: var(--green);
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: var(--green-hover);
+  color: white;
+}
+
+.btn-more {
+  background-color: var(--green);
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.btn-more:hover {
+  background-color: var(--green-hover);
+  color: white;
+}
+
+/* =====================
+   CATEGORIES SECTION
+===================== */
+.categories-section {
+  background-color: var(--beige-light);
+}
+
+.category-overlay {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+}
+
+.category-link {
+  color: var(--orange);
+  transition: color 0.2s ease;
+}
+
+.category-link:hover {
+  color: #fff;
+}
+
+/* =====================
+   STEPS SECTION
+===================== */
+.steps {
+  background-color: var(--beige-dark);
+}
+
+.coop {
+  background-color: var(--green);
+  width: 55px;
+  height: 55px;
+}
+
+/* =====================
+   NEWSLETTER
+===================== */
+.newsletter-section {
+  background-image: url('../../images/home/Newsletter.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.newsletter-label {
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  background-color: rgba(224, 123, 57, 0.3);
+}
+
+.btn-subscribe {
+  background-color: var(--orange);
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.btn-subscribe:hover {
+  background-color: #c96a2a;
+  color: white;
+}
+
+/* =====================
+   FOOTER
+===================== */
+.footer-top {
+  background-color: var(--beige-dark);
+  padding: 50px 0;
+}
+
+.footer-bottom {
+  background-color: var(--beige-footer);
+  padding: 15px 0;
+}
+
+.footer-title {
+  color: var(--green);
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+.footer-text {
+  color: var(--brown-title);
+}
+
+.footer-link {
+  color: var(--brown-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--green);
+}
+
+.footer-social {
+  color: var(--brown-title);
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-social:hover {
+  color: var(--green);
+}
+
+.footer-bottom-text {
+  color: var(--brown-title);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+  .hero-img {
+    height: 280px;
+  }
+}

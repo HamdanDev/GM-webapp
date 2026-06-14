@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+:root {
+  --gm-green: #244b2a;
+  --gm-cream: #f4eee2;
+  --gm-sand: #ead8b8;
+  --gm-orange: #d17946;
+  --gm-text: #303030;
+  --gm-muted: #777777;
+  --gm-radius: 24px;
+  --gm-shadow: 0 20px 60px rgba(36, 75, 42, 0.10);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  overflow-x: hidden;
+  color: var(--gm-text);
+  font-family: 'Lato', sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+img, video, svg { max-width: 100%; height: auto; }
+a { text-underline-offset: 3px; }
+
+.table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.gm-page-shell { width: min(100% - 2rem, 1180px); margin-inline: auto; }
+.gm-card { border-radius: var(--gm-radius); box-shadow: var(--gm-shadow); }
+
+
+/* Navbar fallback/fix: keep the full menu visible on desktop/tablet,
+   and only use the mobile toggler on small screens. */
+@media (min-width: 768px) {
+  .navbar-expand-md .navbar-toggler {
+    display: none !important;
+  }
+
+  .navbar-expand-md .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto !important;
+    align-items: center;
+  }
+
+  .navbar-expand-md .navbar-nav {
+    flex-direction: row !important;
+    align-items: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar-expand-md .navbar-toggler {
+    display: block !important;
+  }
+
+  .navbar-expand-md .navbar-collapse:not(.show) {
+    display: none !important;
+  }
+
+  .navbar-expand-md .navbar-collapse.show,
+  .navbar-expand-md .navbar-collapse.collapsing {
+    width: 100%;
+  }
+
+  .navbar-expand-md .navbar-nav {
+    flex-direction: column !important;
+    gap: 0.25rem !important;
+    padding-top: 1rem;
+  }
+}
+
+/* Keep original Bootstrap/container spacing */
+.container {
+  max-width: 1320px;
+}
+
+.container-fluid {
+  width: 100%;
+}
+
+/* Prevent accidental horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.section-title,
+.page-title,
+.hero-title,
+.product-title,
+.category-title,
+.footer-title {
+  font-family: 'Playfair Display', serif;
+}

@@ -1,0 +1,92 @@
+
+/* Shared responsive layer: keeps the original visual identity while making pages usable on tablets and phones. */
+@media (max-width: 1200px) {
+  .container { padding-left: 1rem; padding-right: 1rem; }
+  .dashboard-container, .admin-container, .profile-layout, .main-layout { gap: 1rem; }
+}
+
+@media (max-width: 992px) {
+  h1, .display-1, .display-2, .display-3 { font-size: clamp(2rem, 7vw, 3.5rem) !important; }
+  h2, .section-title { font-size: clamp(1.8rem, 5vw, 2.8rem) !important; }
+
+  .sidebar, .side-bar, aside {
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: auto !important;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard, .dashboard-wrapper, .profile-wrapper, .admin-wrapper,
+  .dashboard-container, .admin-container, .profile-container, .content-wrapper, main {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .stats-grid, .cards-grid, .products-grid, .category-grid,
+  .row.g-4, .row.g-5 {
+    row-gap: 1rem;
+  }
+
+  table {
+    min-width: 720px;
+  }
+
+  .table, .orders-table, .payments-table, .products-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+  .navbar .container, .navbar .container-fluid { gap: .75rem; }
+  .navbar-brand { font-size: 1.05rem !important; }
+  .hero, .hero-section, .banner { min-height: auto !important; }
+  .hero-img { height: 420px !important; object-fit: cover; }
+
+  .card, .product-card, .category-card, .info-card, .summary-card,
+  .form-card, .content-card, .dashboard-card {
+    border-radius: 18px !important;
+  }
+
+  .search-box, .filters, .filter-bar, .toolbar,
+  .d-flex:has(input), .d-flex:has(select) {
+    flex-wrap: wrap;
+  }
+
+  input, select, textarea, button, .btn {
+    max-width: 100%;
+  }
+
+  .footer .row, footer .row { row-gap: 2rem; }
+}
+
+@media (max-width: 576px) {
+  .container, .container-fluid { padding-left: .85rem; padding-right: .85rem; }
+  .hero-img { height: 360px !important; }
+  .carousel-caption { left: 1rem !important; right: 1rem !important; bottom: 2rem !important; }
+  .carousel-caption h1, .carousel-caption h2 { font-size: 2rem !important; }
+  .carousel-caption p { font-size: .95rem !important; }
+
+  .btn, button { width: auto; min-height: 42px; }
+  .btn-form, .submit-btn, .checkout-btn { width: 100%; }
+
+  .sidebar-link {
+    padding: .8rem 1rem !important;
+    font-size: .95rem !important;
+  }
+
+  .product-img, .category-img, .card-img-top { height: auto; object-fit: cover; }
+
+  .modal-dialog, .popup, .dialog, .form-container {
+    width: calc(100% - 1rem) !important;
+    max-width: calc(100% - 1rem) !important;
+    margin-inline: auto !important;
+  }
+}
