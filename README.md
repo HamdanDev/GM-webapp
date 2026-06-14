@@ -18,32 +18,28 @@ C:/xampp/htdocs/green-market-project
 
 2. Start Apache and MySQL from XAMPP.
 
-3. Create/import the main database schema for `greenmarket` or `GreenMarket`.
+3. Import the database schema first:
+
+```txt
+database/schema.sql
+```
+
+4. Import the seed data after the schema:
+
+```txt
+database/seed.sql
+```
 
 The project config currently uses:
 
 ```php
 $DB_HOST = 'localhost';
-$DB_NAME = 'GreenMarket';
+$DB_NAME = 'greenmarket';
 $DB_USER = 'root';
 $DB_PASS = '';
 ```
 
-If your database is named `greenmarket`, update `config/database.php` or rename the database to match.
-
-4. Import demo content after the main schema:
-
-```txt
-database/seed_demo_data.sql
-```
-
-5. If your database already had old image paths before the asset rename cleanup, run:
-
-```txt
-database/update_image_paths.sql
-```
-
-6. Open the app through Apache:
+5. Open the app through Apache:
 
 ```txt
 http://localhost/green-market-project/
@@ -61,7 +57,7 @@ The seed creates these demo users:
 | Producteur | `producteur@test.com` |
 | Admin | `admin@test.com` |
 
-All three seed users share the same hashed password value in `database/seed_demo_data.sql`. If you do not know the original password, reset it from phpMyAdmin using a new `password_hash()` value or create a new user from the admin dashboard.
+All three seed users share the same hashed password value in `database/seed.sql`. If you do not know the original password, reset it from phpMyAdmin using a new `password_hash()` value or create a new user from the admin dashboard.
 
 ## Project Structure
 
@@ -75,8 +71,8 @@ green-market-project/
   config/
     database.php
   database/
-    seed_demo_data.sql
-    update_image_paths.sql
+    schema.sql
+    seed.sql
   includes/
     permissions.php
     session.php
@@ -333,6 +329,11 @@ These admin sections are intentionally still static or partial for now:
 
 ## Database Notes
 
+Database files are split into:
+
+- `database/schema.sql`: creates the `greenmarket` database, tables, indexes, auto-increments, and constraints.
+- `database/seed.sql`: inserts the demo data exported from phpMyAdmin.
+
 The seed script adds demo data for:
 
 - users
@@ -350,7 +351,7 @@ The seed script adds demo data for:
 - notifications
 - cart rows
 
-The seed also creates extra tables used by the product details page:
+The schema creates extra tables used by the product details page:
 
 - `produit_image`
 - `produit_caracteristique`
@@ -358,7 +359,7 @@ The seed also creates extra tables used by the product details page:
 - `produit_option_valeur`
 - `traceabilite`
 
-It also adds these optional profile fields to `utilisateur`:
+The schema also includes these optional profile fields on `utilisateur`:
 
 - `telephone`
 - `adresse`
@@ -372,11 +373,7 @@ assets/images/products/savonBeldi.png
 assets/images/product-details/savonBeldi/savonBeldiNila.jpeg
 ```
 
-If an image does not load after importing older data, run:
-
-```txt
-database/update_image_paths.sql
-```
+Image paths are already normalized in `database/seed.sql`.
 
 ## Development Notes
 

@@ -3,7 +3,7 @@
 // Update these values if your MySQL credentials are different.
 
 $DB_HOST = 'localhost';
-$DB_NAME = 'GreenMarket';
+$DB_NAME = 'greenmarket';
 $DB_USER = 'root';
 $DB_PASS = '';
 
